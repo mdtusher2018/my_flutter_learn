@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:template/core/storage/i_local_storage_service.dart';
-import 'package:template/core/storage/storage_key.dart';
+import 'package:template/core/services/storage/i_local_storage_service.dart';
+import 'package:template/core/services/storage/storage_key.dart';
 
 class LocalStorageService implements ILocalStorageService {
   static final LocalStorageService _instance = LocalStorageService._internal();

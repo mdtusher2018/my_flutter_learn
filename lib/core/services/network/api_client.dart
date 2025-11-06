@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:template/core/utils/logger.dart';
 import 'package:template/core/error/api_exception.dart';
-import 'package:template/core/network/interceptor.dart/auth_interceptor.dart';
-import 'package:template/core/network/interceptor.dart/logger_interceptor.dart';
-import 'package:template/core/network/interceptor.dart/refresh_token_interceptor.dart';
-import 'package:template/core/network/interceptor.dart/retry_interceptor.dart';
-import 'package:template/core/storage/i_local_storage_service.dart';
+import 'package:template/core/services/network/interceptor.dart/auth_interceptor.dart';
+import 'package:template/core/services/network/interceptor.dart/logger_interceptor.dart';
+import 'package:template/core/services/network/interceptor.dart/refresh_token_interceptor.dart';
+import 'package:template/core/services/network/interceptor.dart/retry_interceptor.dart';
+import 'package:template/core/services/storage/i_local_storage_service.dart';
 
 class ApiClient {
   final Dio dio; 

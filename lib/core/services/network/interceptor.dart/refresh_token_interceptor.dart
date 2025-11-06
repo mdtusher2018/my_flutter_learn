@@ -4,8 +4,8 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:template/core/utils/logger.dart';
 
-import 'package:template/core/storage/i_local_storage_service.dart';
-import 'package:template/core/storage/storage_key.dart';
+import 'package:template/core/services/storage/i_local_storage_service.dart';
+import 'package:template/core/services/storage/storage_key.dart';
 import 'package:template/core/utils/api_end_points.dart';
 
 class RefreshTokenInterceptor extends Interceptor {

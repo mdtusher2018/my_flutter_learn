@@ -1,4 +1,4 @@
-import 'package:template/core/storage/storage_key.dart';
+import 'package:template/core/services/storage/storage_key.dart';
 
 abstract class ILocalStorageService {
   Future<void> saveKey(StorageKey key, dynamic value);

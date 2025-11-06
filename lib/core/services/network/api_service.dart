@@ -1,7 +1,7 @@
 // lib/core/network/api_service.dart
 import 'dart:io';
-import 'package:template/core/network/api_client.dart';
-import 'package:template/core/network/i_api_service.dart';
+import 'package:template/core/services/network/api_client.dart';
+import 'package:template/core/services/network/i_api_service.dart';
 
 class ApiService implements IApiService {
   final ApiClient _client;
