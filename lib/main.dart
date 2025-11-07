@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:template/core/providers.dart';
 import 'package:template/core/services/snackbar/snackbar_service.dart';
-import 'package:template/features/login/login_page.dart';
-
-
+import 'package:template/features/authentication/presentation/pages/login_page.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -22,7 +20,7 @@ class MyApp extends ConsumerWidget {
       title: 'Template App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: LoginScreen(),
+      home: LoginPage(),
     );
   }
 }
