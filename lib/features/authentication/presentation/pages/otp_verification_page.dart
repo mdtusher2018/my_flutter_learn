@@ -24,12 +24,6 @@ class _OtpVerificationPageState extends ConsumerState<OtpVerificationPage> {
 
   void _verifyOtp() {
     final otp = _otpController.text.trim();
-    if (otp.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter the OTP code')),
-      );
-      return;
-    }
 
     ref.read(otpVerificationProvider.notifier).verifyOTP(otp: otp);
   }

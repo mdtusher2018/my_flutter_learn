@@ -16,11 +16,11 @@ class ForgotPasswordResponse {
   // Factory method to parse JSON into a ForgotPasswordResponse object
   factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) {
     return ForgotPasswordResponse(
-      status: json['status'],
-      statusCode: json['statusCode'],
-      message: json['message'],
-      data: ForgotPasswordData.fromJson(json['data']),
-      errors: List<String>.from(json['errors']),
+      status: json['status'] ?? "",
+      statusCode: json['statusCode'] ?? 0,
+      message: json['message'] ?? "",
+      data: ForgotPasswordData.fromJson(json['data'] ?? {}),
+      errors: List<String>.from(json['errors'] ?? []),
     );
   }
 }
@@ -33,7 +33,7 @@ class ForgotPasswordData {
 
   // Factory method to parse JSON into a ForgotPasswordData object
   factory ForgotPasswordData.fromJson(Map<String, dynamic> json) {
-    return ForgotPasswordData(type: json['type'], token: json['attributes']);
+    return ForgotPasswordData(type: json['email'], token: json['token']);
   }
 
   // Method to convert ForgotPasswordData object into JSON

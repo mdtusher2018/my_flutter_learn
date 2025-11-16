@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:template/features/authentication/presentation/pages/email_verification_page.dart';
 import 'package:template/features/authentication/presentation/pages/forgot_password_page.dart';
+import 'package:template/features/authentication/presentation/pages/otp_verification_page.dart';
 import 'package:template/features/authentication/presentation/pages/signin_page.dart';
 import 'package:template/features/authentication/presentation/pages/signup_page.dart';
 import 'package:template/splash_page.dart';
@@ -32,6 +33,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.forgotPassword,
         builder: (context, state) => ForgotPasswordPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.otpVerification,
+        builder: (context, state) => OtpVerificationPage(),
       ),
 
       GoRoute(

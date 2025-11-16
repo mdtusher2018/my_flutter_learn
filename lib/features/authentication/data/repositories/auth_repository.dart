@@ -26,6 +26,9 @@ class AuthRepository implements IAuthRepository {
     final res = await api.post(ApiEndpoints.signup, {
       "email": email,
       "password": password,
+      "name": "John Doe",
+      "phoneNumber": "+8801646456527",
+      "registerWith": "credentials",
     });
     return SignupResponse.fromJson(res);
   }
@@ -42,7 +45,7 @@ class AuthRepository implements IAuthRepository {
 
   @override
   Future<ForgotPasswordResponse> forgotPassword(String email) async {
-    final res = await api.post(ApiEndpoints.forgetPassword, {'email': email});
+    final res = await api.patch(ApiEndpoints.forgetPassword, {'email': email});
     return ForgotPasswordResponse.fromJson(res);
   }
 

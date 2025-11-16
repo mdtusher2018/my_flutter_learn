@@ -37,7 +37,7 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
     ) {
       next.whenData((success) {
         if (success != null) {
-          context.push(AppRoutes.home);
+          context.push(AppRoutes.otpVerification);
         }
       });
     });

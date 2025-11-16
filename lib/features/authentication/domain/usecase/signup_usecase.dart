@@ -49,10 +49,7 @@ class SignupUseCase {
     // 🔹 Call repository (API)
     final response = await authRepository.signup(email, password);
 
-    final signupEntity = SignupEntity(
-      signUpToken: response.data!.signUpToken,
-      type: response.data!.type,
-    );
+    final signupEntity = SignupEntity(signUpToken: response.data!.signUpToken);
 
     // 🔹 Save token locally
     await localStorage.saveKey(
