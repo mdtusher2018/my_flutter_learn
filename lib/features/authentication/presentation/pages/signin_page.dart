@@ -105,6 +105,7 @@ class SigninPage extends ConsumerWidget {
                 );
                 if (controller != null) {
                   artboard.addController(controller);
+
                   riveAnimationController.setController(controller);
                 }
               },
