@@ -1,24 +1,29 @@
+import 'package:template/core/base/failure.dart';
+import 'package:template/core/base/result.dart';
 import 'package:template/core/services/network/i_api_service.dart';
 import 'package:template/core/utils/api_end_points.dart';
 import 'package:template/features/authentication/data/models/email_verified_response.dart';
+import 'package:template/features/authentication/data/models/sign_in/signin_response.dart';
 import 'package:template/features/authentication/data/models/forgot_password_response.dart';
 import 'package:template/features/authentication/data/models/otp_verified_response.dart';
-import 'package:template/features/authentication/data/models/signin_response.dart';
+
 import 'package:template/features/authentication/data/models/signup_response.dart';
 import 'package:template/features/authentication/domain/repositories/i_auth_repository.dart';
 
-class AuthRepository implements IAuthRepository {
+final class AuthRepository extends IAuthRepository {
   final IApiService api;
   AuthRepository(this.api);
 
   @override
-  Future<SigninResponse> login(String email, String password) async {
-    final res = await api.post(ApiEndpoints.signin, {
-      "email": email,
-      "password": password,
-    });
+  Future<Result<SigninResponse, Failure>> login(String email, String password) {
+    return asyncGuard(() async {
+      final res = await api.post(ApiEndpoints.signin, {
+        "email": email,
+        "password": password,
+      });
 
-    return SigninResponse.fromJson(res);
+      return SigninResponse.fromJson(res);
+    });
   }
 
   @override

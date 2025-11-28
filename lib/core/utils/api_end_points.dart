@@ -14,7 +14,7 @@ class ApiEndpoints {
   static String refreshToken = "auth/refresh-token";
 
   //authentication
-  static String signin = "auth/login";
+  static String signin = "auth/signin";
 
   static String signup = "users";
 

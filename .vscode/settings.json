@@ -1,0 +1,9 @@
+{
+  "dart.flutterSdkPath": ".fvm/versions/3.38.3",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true,
+    "**/.fvm": true
+  }
+}

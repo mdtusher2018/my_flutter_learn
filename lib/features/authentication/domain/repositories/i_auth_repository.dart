@@ -1,11 +1,14 @@
+import 'package:template/core/base/failure.dart';
+import 'package:template/core/base/repository.dart';
+import 'package:template/core/base/result.dart';
 import 'package:template/features/authentication/data/models/email_verified_response.dart';
 import 'package:template/features/authentication/data/models/forgot_password_response.dart';
 import 'package:template/features/authentication/data/models/otp_verified_response.dart';
-import 'package:template/features/authentication/data/models/signin_response.dart';
+import 'package:template/features/authentication/data/models/sign_in/signin_response.dart';
 import 'package:template/features/authentication/data/models/signup_response.dart';
 
-abstract class IAuthRepository {
-  Future<SigninResponse> login(String email, String password);
+abstract base class IAuthRepository extends Repository {
+  Future<Result<SigninResponse, Failure>> login(String email, String password);
   Future<SignupResponse> signup(String email, String password);
   Future<EmailVerifiedResponse> emailVerification(String otp);
   Future<ForgotPasswordResponse> forgotPassword(String email);

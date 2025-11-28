@@ -1,11 +1,12 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rive/rive.dart';
-
 import 'package:template/config/router/routes.dart';
-import 'package:template/core/providers.dart';
 import 'package:template/features/authentication/domain/entites/signin_entity.dart';
+import 'package:template/features/authentication/presentation/notifiers/signin_notifier.dart';
 
 // Define a class to hold both the Rive animation state and the controller
 class RiveState {
@@ -21,7 +22,6 @@ class RiveState {
     this.controller,
   });
 
-  // Copy constructor to update individual fields
   RiveState copyWith({
     bool? lookingDown,
     bool? handsUp,
@@ -73,15 +73,15 @@ final _riveAnimationProvider =
 class SigninPage extends ConsumerWidget {
   SigninPage({super.key});
 
-  final emailCtrl = TextEditingController(text: "businessman@gmail.com");
+  final emailCtrl = TextEditingController(text: "xokekek289@bablace.com");
   final passCtrl = TextEditingController(text: "hello123");
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final riveAnimationController = ref.watch(_riveAnimationProvider.notifier);
 
-    final authState = ref.watch(signinProvider);
-    ref.listen<AsyncValue<SigninEntity?>>(signinProvider, (prev, next) {
+    final authState = ref.watch(loginNotifierProvider);
+    ref.listen<AsyncValue<SigninEntity?>>(loginNotifierProvider, (prev, next) {
       next.whenData((success) {
         if (success != null) {
           context.go(AppRoutes.home);
@@ -89,97 +89,159 @@ class SigninPage extends ConsumerWidget {
       });
     });
     return Scaffold(
-      appBar: AppBar(title: const Text("Login")),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 450,
-            child: RiveAnimation.asset(
-              "assest/3469-7899-login-screen-character.riv",
-              artboard: "Artboard",
-              fit: BoxFit.cover,
-              onInit: (Artboard artboard) {
-                final controller = StateMachineController.fromArtboard(
-                  artboard,
-                  'State Machine 1',
-                );
-                if (controller != null) {
-                  artboard.addController(controller);
+      appBar: AppBar(
+        title: const Text(
+          "Login",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.cyan.withOpacity(0.1),
+        elevation: 4.0,
+        centerTitle: true,
+        // Adding a subtle shadow and a custom style for the app bar
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 450,
+              child: RiveAnimation.asset(
+                "assest/3469-7899-login-screen-character.riv",
+                artboard: "Artboard",
+                fit: BoxFit.cover,
+                onInit: (Artboard artboard) {
+                  final controller = StateMachineController.fromArtboard(
+                    artboard,
+                    'State Machine 1',
+                  );
+                  if (controller != null) {
+                    artboard.addController(controller);
 
-                  riveAnimationController.setController(controller);
-                }
-              },
+                    riveAnimationController.setController(controller);
+                  }
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextField(
-                  onChanged: (value) {
-                    ref
-                        .read(_riveAnimationProvider.notifier)
-                        .setLookingDown(true);
-                    ref.read(_riveAnimationProvider.notifier).setHandsUp(false);
-                    if (value.isEmpty) {
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                spacing: 16,
+                children: [
+                  TextField(
+                    onChanged: (value) {
                       ref
                           .read(_riveAnimationProvider.notifier)
-                          .setLookingDown(false);
-                    }
-                    ref
-                        .read(_riveAnimationProvider.notifier)
-                        .setLookLeftRight(value.length * 2.0);
-                  },
-                  onSubmitted: (_) {
-                    ref
-                        .read(_riveAnimationProvider.notifier)
-                        .setLookingDown(false);
-                    ref.read(_riveAnimationProvider.notifier).setHandsUp(false);
-                  },
-
-                  controller: emailCtrl,
-                  decoration: const InputDecoration(labelText: 'Email'),
-                ),
-                TextField(
-                  onChanged: (value) {
-                    ref.read(_riveAnimationProvider.notifier).setHandsUp(true);
-                    if (value.isEmpty) {
+                          .setLookingDown(true);
                       ref
                           .read(_riveAnimationProvider.notifier)
                           .setHandsUp(false);
-                    }
-                  },
-                  onSubmitted: (_) {
-                    ref.read(_riveAnimationProvider.notifier).setHandsUp(false);
-                  },
-
-                  controller: passCtrl,
-                  obscureText: true,
-                  decoration: const InputDecoration(labelText: 'Password'),
-                ),
-                const SizedBox(height: 20),
-                authState.isLoading
-                    ? const CircularProgressIndicator()
-                    : ElevatedButton(
-                      onPressed: () {
+                      if (value.isEmpty) {
                         ref
-                            .read(signinProvider.notifier)
-                            .login(
-                              email: emailCtrl.text.trim(),
-                              password: passCtrl.text.trim(),
-                            );
-                      },
-                      child: const Text("Login"),
+                            .read(_riveAnimationProvider.notifier)
+                            .setLookingDown(false);
+                      }
+                      ref
+                          .read(_riveAnimationProvider.notifier)
+                          .setLookLeftRight(value.length * 2.0);
+                    },
+                    onSubmitted: (_) {
+                      ref
+                          .read(_riveAnimationProvider.notifier)
+                          .setLookingDown(false);
+                      ref
+                          .read(_riveAnimationProvider.notifier)
+                          .setHandsUp(false);
+                    },
+
+                    controller: emailCtrl,
+
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      labelStyle: TextStyle(color: Colors.black),
+                      filled: true,
+                      fillColor: Colors.cyan.withOpacity(0.1),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 16.0,
+                        horizontal: 20.0,
+                      ),
                     ),
-                if (authState.hasError)
-                  Text(
-                    authState.error.toString(),
-                    style: const TextStyle(color: Colors.red),
                   ),
-              ],
+                  TextField(
+                    onChanged: (value) {
+                      ref
+                          .read(_riveAnimationProvider.notifier)
+                          .setHandsUp(true);
+                      if (value.isEmpty) {
+                        ref
+                            .read(_riveAnimationProvider.notifier)
+                            .setHandsUp(false);
+                      }
+                    },
+                    onSubmitted: (_) {
+                      ref
+                          .read(_riveAnimationProvider.notifier)
+                          .setHandsUp(false);
+                    },
+
+                    controller: passCtrl,
+                    obscureText: true,
+
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      labelStyle: TextStyle(color: Colors.black),
+                      filled: true,
+                      fillColor: Colors.cyan.withOpacity(0.1),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                        vertical: 16.0,
+                        horizontal: 20.0,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  authState.isLoading
+                      ? const CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: () {
+                            ref
+                                .read(loginNotifierProvider.notifier)
+                                .login(
+                                  email: emailCtrl.text.trim(),
+                                  password: passCtrl.text.trim(),
+                                );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.cyan.shade50,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            minimumSize: const Size(double.infinity, 60),
+                          ),
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                  if (authState.hasError)
+                    Text(
+                      authState.error.toString(),
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

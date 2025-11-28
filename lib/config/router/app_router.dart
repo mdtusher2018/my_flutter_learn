@@ -15,7 +15,7 @@ import 'routes.dart';
 final appRouterProvider = Provider<GoRouter>((ref) {
   final analytics = FirebaseAnalytics.instance;
   return GoRouter(
-    initialLocation: AppRoutes.splash,
+    initialLocation: AppRoutes.signIn,
     observers: [AppAnalyticsObserver(analytics)],
     routes: [
       GoRoute(
