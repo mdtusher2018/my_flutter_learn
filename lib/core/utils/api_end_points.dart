@@ -16,7 +16,7 @@ class ApiEndpoints {
   //authentication
   static String signin = "auth/signin";
 
-  static String signup = "users";
+  static String signup = "auth/sign-up";
 
   static String emailVerification = "auth/verify-email";
   static String resendOTP = "auth/resend-otp";

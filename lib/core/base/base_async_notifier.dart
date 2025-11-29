@@ -29,9 +29,9 @@ abstract class BaseAsyncNotifier<T> extends StateNotifier<AsyncValue<T?>> {
     } catch (e, st) {
       state = AsyncValue.error(e, st);
       AppLogger.error(e.toString());
-      if (showError) {
-        snackBarService.showError(e.toString());
-      }
+      // if (showError) {
+      //   snackBarService.showError(e.toString());
+      // }
     }
     // finally {
     //   // Optional: You can reset loading manually or leave as is

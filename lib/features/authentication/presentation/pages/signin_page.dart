@@ -102,25 +102,24 @@ class SigninPage extends ConsumerWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 450,
-              child: RiveAnimation.asset(
-                "assest/3469-7899-login-screen-character.riv",
-                artboard: "Artboard",
-                fit: BoxFit.cover,
-                onInit: (Artboard artboard) {
-                  final controller = StateMachineController.fromArtboard(
-                    artboard,
-                    'State Machine 1',
-                  );
-                  if (controller != null) {
-                    artboard.addController(controller);
-
-                    riveAnimationController.setController(controller);
-                  }
-                },
-              ),
-            ),
+            // SizedBox(
+            //   height: 450,
+            //   child: RiveAnimation.asset(
+            //     "assest/3469-7899-login-screen-character.riv",
+            //     artboard: "Artboard",
+            //     fit: BoxFit.cover,
+            //     onInit: (Artboard artboard) {
+            //       final controller = StateMachineController.fromArtboard(
+            //         artboard,
+            //         'State Machine 1',
+            //       );
+            //       if (controller != null) {
+            //         artboard.addController(controller);
+            //         riveAnimationController.setController(controller);
+            //       }
+            //     },
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(

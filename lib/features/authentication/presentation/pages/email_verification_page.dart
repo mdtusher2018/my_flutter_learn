@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:template/config/router/routes.dart';
 import 'package:template/core/providers.dart';
 import 'package:template/features/authentication/domain/entites/email_verified_entity.dart';
+import 'package:template/features/authentication/presentation/notifiers/email_verified_notifier.dart';
 
 class EmailVerificationPage extends ConsumerStatefulWidget {
   const EmailVerificationPage({super.key});
@@ -24,24 +25,36 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
 
   void _verifyEmail() {
     ref
-        .read(emailVerificationProvider.notifier)
+        .read(emailVerifiedNotifierProvider.notifier)
         .verifyEmail(otp: _codeController.text.trim());
   }
 
   @override
-  Widget build(BuildContext context) {
-    final state = ref.watch(emailVerificationProvider);
+  void initState() {
+    super.initState();
+    ref.listenManual<AsyncValue<EmailVerifiedEntity?>>(
+      emailVerifiedNotifierProvider,
+      (prev, next) {
+        next.whenData((success) {
+          if (success != null) {
+            context.go(AppRoutes.home);
+          }
+        });
 
-    ref.listen<AsyncValue<EmailVerifiedEntity?>>(emailVerificationProvider, (
-      prev,
-      next,
-    ) {
-      next.whenData((success) {
-        if (success != null) {
-          context.go(AppRoutes.home);
-        }
-      });
-    });
+        next.whenOrNull(
+          error: (error, stackTrace) {
+            (ref.read(
+              snackBarServiceProvider,
+            )).showError(error.toString(), context: context);
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(emailVerifiedNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text("Verify Your Email")),
@@ -63,9 +76,9 @@ class _EmailVerificationPageState extends ConsumerState<EmailVerificationPage> {
             state.isLoading
                 ? const CircularProgressIndicator()
                 : ElevatedButton(
-                  onPressed: _verifyEmail,
-                  child: const Text("Verify"),
-                ),
+                    onPressed: _verifyEmail,
+                    child: const Text("Verify"),
+                  ),
           ],
         ),
       ),

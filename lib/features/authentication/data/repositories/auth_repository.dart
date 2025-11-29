@@ -2,12 +2,11 @@ import 'package:template/core/base/failure.dart';
 import 'package:template/core/base/result.dart';
 import 'package:template/core/services/network/i_api_service.dart';
 import 'package:template/core/utils/api_end_points.dart';
-import 'package:template/features/authentication/data/models/email_verified_response.dart';
+import 'package:template/features/authentication/data/models/email_verification/email_verified_response.dart';
 import 'package:template/features/authentication/data/models/sign_in/signin_response.dart';
 import 'package:template/features/authentication/data/models/forgot_password_response.dart';
 import 'package:template/features/authentication/data/models/otp_verified_response.dart';
-
-import 'package:template/features/authentication/data/models/signup_response.dart';
+import 'package:template/features/authentication/data/models/sign_up/signup_response.dart';
 import 'package:template/features/authentication/domain/repositories/i_auth_repository.dart';
 
 final class AuthRepository extends IAuthRepository {
@@ -27,25 +26,34 @@ final class AuthRepository extends IAuthRepository {
   }
 
   @override
-  Future<SignupResponse> signup(String email, String password) async {
-    final res = await api.post(ApiEndpoints.signup, {
-      "email": email,
-      "password": password,
-      "name": "John Doe",
-      "phoneNumber": "+8801646456527",
-      "registerWith": "credentials",
+  Future<Result<SignupResponse, Failure>> signup(
+    String email,
+    String password,
+  ) async {
+    return asyncGuard(() async {
+      final res = await api.post(ApiEndpoints.signup, {
+        "email": email,
+        "password": password,
+        "name": "John Doe",
+        "phoneNumber": "+8801646456527",
+        "registerWith": "credentials",
+      });
+      return SignupResponse.fromJson(res);
     });
-    return SignupResponse.fromJson(res);
   }
 
   @override
-  Future<EmailVerifiedResponse> emailVerification(String otp) async {
-    final res = await api.post(ApiEndpoints.emailVerification, {
-      "otp": otp,
-      "purpose": "email-verification",
-    });
+  Future<Result<EmailVerifiedResponse, Failure>> emailVerification(
+    String otp,
+  ) async {
+    return asyncGuard(() async {
+      final res = await api.post(ApiEndpoints.emailVerification, {
+        "otp": otp,
+        "purpose": "email-verification",
+      });
 
-    return EmailVerifiedResponse.fromJson(res);
+      return EmailVerifiedResponse.fromJson(res);
+    });
   }
 
   @override

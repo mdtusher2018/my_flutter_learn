@@ -1,32 +1,53 @@
-// domain/usecases/signup_usecase.dart
-
-import 'package:template/core/base/base_async_notifier.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:template/core/base/failure.dart';
+import 'package:template/core/base/result.dart';
+import 'package:template/core/providers.dart';
 import 'package:template/features/authentication/domain/entites/signup_entity.dart';
 import 'package:template/features/authentication/domain/usecase/signup_usecase.dart';
+part 'signup_notifier.g.dart';
 
-class SignupNotifier extends BaseAsyncNotifier<SignupEntity> {
-  final SignupUseCase signupUseCase;
+@riverpod
+SignupUseCase _signupUseCase(_SignupUseCaseRef ref) {
+  return SignupUseCase(
+    localStorage: ref.watch(localStorageProvider),
+    authRepository: ref.watch(authRepositoryProvider),
+  );
+}
 
-  SignupNotifier(
-    super.apiService,
-    super.snackBarService, {
-    required this.signupUseCase,
-  });
+@riverpod
+class SignupNotifier extends _$SignupNotifier {
+  late final SignupUseCase signupUseCase;
+
+  @override
+  FutureOr<SignupEntity?> build() {
+    signupUseCase = ref.watch(_signupUseCaseProvider);
+    return null;
+  }
 
   Future<void> signup({
     required String email,
     required String password,
     required String confirmPassword,
   }) async {
-    await execute(() async {
-      // Delegate to SignupUseCase for actual logic
-      final response = await signupUseCase.execute(
-        email: email,
-        password: password,
-        confirmPassword: confirmPassword,
-      );
+    state = const AsyncLoading();
 
-      return response;
-    });
+    final result = await signupUseCase.execute(
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+    );
+
+    if (result is Success) {
+      state = AsyncData((result as Success).data);
+      return;
+    } else if (result is FailureResult) {
+      final Failure error = (result as FailureResult).error;
+      state = AsyncError(
+        error.message,
+        error.stackTrace ?? StackTrace.fromString("No trace found"),
+      );
+    }
+
+    return;
   }
 }

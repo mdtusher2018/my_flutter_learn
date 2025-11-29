@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 class CrashlyticsService {
   // Initialize Firebase Crashlytics
   static void initialize() {
+    if (kDebugMode) return;
+
     // Global error handling for Flutter errors
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 

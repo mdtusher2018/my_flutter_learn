@@ -1,43 +1,43 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'signin_notifier.dart';
+part of 'signup_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$loginUseCaseHash() => r'dce0834312544142b12f9d5f596364655f7ddbe1';
+String _$signupUseCaseHash() => r'5c5bfbe4b61a853067f67d11121d44c76bff6732';
 
-/// See also [_loginUseCase].
-@ProviderFor(_loginUseCase)
-final _loginUseCaseProvider = AutoDisposeProvider<SigninUseCase>.internal(
-  _loginUseCase,
-  name: r'_loginUseCaseProvider',
+/// See also [_signupUseCase].
+@ProviderFor(_signupUseCase)
+final _signupUseCaseProvider = AutoDisposeProvider<SignupUseCase>.internal(
+  _signupUseCase,
+  name: r'_signupUseCaseProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$loginUseCaseHash,
+      : _$signupUseCaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef _LoginUseCaseRef = AutoDisposeProviderRef<SigninUseCase>;
-String _$loginNotifierHash() => r'095e748af20162d7a61610b612a03ee7ed93e085';
+typedef _SignupUseCaseRef = AutoDisposeProviderRef<SignupUseCase>;
+String _$signupNotifierHash() => r'3a94820ea6230715f8ac14fc6dd7f0e3a9356e9c';
 
-/// See also [LoginNotifier].
-@ProviderFor(LoginNotifier)
-final loginNotifierProvider =
-    AutoDisposeAsyncNotifierProvider<LoginNotifier, SigninEntity?>.internal(
-      LoginNotifier.new,
-      name: r'loginNotifierProvider',
+/// See also [SignupNotifier].
+@ProviderFor(SignupNotifier)
+final signupNotifierProvider =
+    AutoDisposeAsyncNotifierProvider<SignupNotifier, SignupEntity?>.internal(
+      SignupNotifier.new,
+      name: r'signupNotifierProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$loginNotifierHash,
+          : _$signupNotifierHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$LoginNotifier = AutoDisposeAsyncNotifier<SigninEntity?>;
+typedef _$SignupNotifier = AutoDisposeAsyncNotifier<SignupEntity?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:template/config/router/routes.dart';
-import 'package:template/core/providers.dart';
 import 'package:template/features/authentication/domain/entites/signup_entity.dart';
+import 'package:template/features/authentication/presentation/notifiers/signup_notifier.dart';
 
 class SignupPage extends ConsumerWidget {
   SignupPage({super.key});
@@ -14,14 +14,15 @@ class SignupPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final signupState = ref.watch(signupProvider);
-    ref.listen<AsyncValue<SignupEntity?>>(signupProvider, (prev, next) {
+    final signupState = ref.watch(signupNotifierProvider);
+    ref.listen<AsyncValue<SignupEntity?>>(signupNotifierProvider, (prev, next) {
       next.whenData((success) {
         if (success != null) {
           context.push(AppRoutes.emailVerification);
         }
       });
     });
+
     return Scaffold(
       appBar: AppBar(title: const Text("Signup")),
       body: Padding(
@@ -46,17 +47,17 @@ class SignupPage extends ConsumerWidget {
             signupState.isLoading
                 ? const CircularProgressIndicator()
                 : ElevatedButton(
-                  onPressed: () {
-                    ref
-                        .read(signupProvider.notifier)
-                        .signup(
-                          email: emailCtrl.text.trim(),
-                          password: passCtrl.text.trim(),
-                          confirmPassword: confirmPassCtrl.text.trim(),
-                        );
-                  },
-                  child: const Text("Signup"),
-                ),
+                    onPressed: () {
+                      ref
+                          .read(signupNotifierProvider.notifier)
+                          .signup(
+                            email: emailCtrl.text.trim(),
+                            password: passCtrl.text.trim(),
+                            confirmPassword: confirmPassCtrl.text.trim(),
+                          );
+                    },
+                    child: const Text("Signup"),
+                  ),
             if (signupState.hasError)
               Padding(
                 padding: const EdgeInsets.only(top: 12),

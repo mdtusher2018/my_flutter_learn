@@ -8,7 +8,7 @@ import 'package:template/core/base/result.dart';
 part 'signin_notifier.g.dart';
 
 @riverpod
-SigninUseCase loginUseCase(LoginUseCaseRef ref) {
+SigninUseCase _loginUseCase(_LoginUseCaseRef ref) {
   return SigninUseCase(
     authRepository: ref.watch(authRepositoryProvider),
     localStorage: ref.watch(localStorageProvider),
@@ -21,7 +21,7 @@ class LoginNotifier extends _$LoginNotifier {
 
   @override
   FutureOr<SigninEntity?> build() {
-    _useCase = ref.watch(loginUseCaseProvider);
+    _useCase = ref.watch(_loginUseCaseProvider);
     return null; // initial state
   }
 
@@ -41,7 +41,7 @@ class LoginNotifier extends _$LoginNotifier {
       case FailureResult(:final error):
         state = AsyncError(
           error.message,
-          error.stackTrace ?? StackTrace.fromString("stackTraceString"),
+          error.stackTrace ?? StackTrace.fromString("No trace found"),
         );
 
         return;
