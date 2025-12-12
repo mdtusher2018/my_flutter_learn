@@ -64,8 +64,7 @@ A production-ready **Flutter project template** built with **Clean Architecture*
 Unit tests included for:
 
 * Services
-* ViewModels / Notifiers
-* Utility functions
+* UseCase
 
 Tools used:
 
@@ -91,9 +90,7 @@ Tools used:
 
 Integrated Rive animations for:
 
-* Splash screen
-* Login animation
-* Onboarding views
+* Login views animation
 
 Example asset included:
 
@@ -212,31 +209,31 @@ flutter run
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
-  dio: ^5.9.0
-  flutter_secure_storage: ^9.2.4
-  shared_preferences: ^2.5.3
-  flutter_riverpod: ^2.6.1
-  flutter_screenutil: ^5.9.3
-  logger: ^2.6.2
-  go_router: ^17.0.0
-  firebase_core: ^4.2.1
-  firebase_analytics: ^12.0.4
-  firebase_crashlytics: ^5.0.5
-  rive: ^0.13.20
-  riverpod_annotation: ^2.3.5
-  freezed_annotation: ^3.0.0
+  cupertino_icons: 
+  dio: 
+  flutter_secure_storage: 
+  shared_preferences: 
+  flutter_riverpod: 
+  flutter_screenutil: 
+  logger: 
+  go_router: 
+  firebase_core: 
+  firebase_analytics: 
+  firebase_crashlytics: 
+  rive: 
+  riverpod_annotation: 
+  freezed_annotation: 
   json_annotation:
-  protoc_plugin: ^25.0.0
+  protoc_plugin: 
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
-  mocktail: ^1.0.4
+  flutter_lints: 
+  mocktail:
   freezed:
-  build_runner: ^2.5.4
+  build_runner: 
   riverpod_generator:
   json_serializable:
   mockito:
@@ -253,3 +250,4 @@ Feel free to open issues or submit PRs! Improvements are always welcome.
 ## ✨ Thank You
 Thanks for checking out this template.
 Wishing you an awesome Flutter development journey! 🚀
+
