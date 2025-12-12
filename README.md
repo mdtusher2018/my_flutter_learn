@@ -108,46 +108,44 @@ assets/3469-7899-login-screen-character.riv
 ```
 lib/
 ├── src/
-│ ├── config/ # App-level configs (routes, env, app setup)
-│ │ └── router/ # Navigation & GoRouter setup
-│ │ ├── app_router.dart
-│ │ └── routes.dart
-│ │
-│ ├── core/ # Core utilities, services & foundational layers
-│ │ ├── analytics_and_crashlytics/ # Firebase analytics + crash logging
-│ │ ├── base/ # Base classes (BaseNotifier, BaseService, etc.)
-│ │ ├── di/ # Dependency injection
-│ │ │ ├── parts/ # DI modules grouped by feature
-│ │ │ └── dependency_injection.dart
-│ │ │
-│ │ ├── services/ # App-wide reusable services
-│ │ │ ├── network/ # Dio client, interceptors, API setup
-│ │ │ ├── snackbar/ # Global snackbar service
-│ │ │ ├── storage/ # Secure/local storage handlers
-│ │ └── utils/ # Utility functions & helpers
-│ │ └── providers.dart # Global Riverpod providers
-│ │
-│ ├── features/ # Feature-driven modules
-│ │ ├── authentication/ # Auth module
-│ │ │ ├── data/ # API models + repositories
-│ │ │ │ ├── models/ # Freezed models
-│ │ │ │ └── repositories/ # Data repository implementations
-│ │ │ ├── domain/ # Business logic contracts
-│ │ │ │ ├── entities/ # Domain-layer entity models
-│ │ │ │ └── repositories/ # Abstract repository interfaces
-│ │ │ │
-│ │ │ ├── usecase/ # Authentication usecases
-│ │ │ └── presentation/ # UI + state management
-│ │ │ ├── notifiers/ # Riverpod Notifiers
-│ │ │ └── pages/ # Screens & widgets
-│ │ │
-│ │ └── profile/ # Profile feature module
-│ │
-│ └── shared/ # Reusable UI widgets, extensions, mixins
+│   ├── config/                      # App-level configs (routes, env, app setup)
+│   │   └── router/                  # Navigation & GoRouter setup
+│   │       ├── app_router.dart
+│   │       └── routes.dart
+│   │
+│   ├── core/                        # Core utilities, services & foundational layers
+│   │   ├── analytics_and_crashlytics/ # Firebase analytics + crash logging
+│   │   ├── base/                    # Base classes (BaseNotifier, BaseService, etc.)
+│   │   ├── di/                      # Dependency injection setup
+│   │   │   ├── parts/               # DI modules grouped by feature
+│   │   │   └── dependency_injection.dart
+│   │   │
+│   │   ├── services/                # App-wide reusable services
+│   │   │   ├── network/             # Dio client, interceptors, API setup
+│   │   │   ├── snackbar/            # Global snackbar service
+│   │   │   ├── storage/             # Secure/local storage handlers
+│   │   └── utils/                   # Utility functions & helpers
+│   │   └── providers.dart           # Global Riverpod providers
+│   │
+│   ├── features/                    # Feature-driven modules
+│   │   ├── authentication/          # Auth module
+│   │   │   ├── data/                # API models + repositories
+│   │   │   │   ├── models/          # Freezed models
+│   │   │   │   └── repositories/    # Data repository implementations
+│   │   │   ├── domain/              # Business logic contracts
+│   │   │   │   ├── entities/        # Domain-layer entity models
+│   │   │   │   └── repositories/    # Abstract repository interfaces
+│   │   │   ├── usecase/             # Authentication usecases
+│   │   │   └── presentation/        # UI + state management
+│   │   │       ├── notifiers/       # Riverpod Notifiers
+│   │   │       └── pages/           # Screens & widgets
+│   │   └── profile/                 # Profile feature module
+│   │
+│   └── shared/                      # Reusable UI widgets, extensions, mixins
 │
-├── unorganized_files/ # Temporary storage for unstructured files
-├── firebase_options.dart # Firebase initialization config
-└── main.dart # App entry point
+├── unorganized_files/               # Temporary storage for unstructured files
+├── firebase_options.dart            # Firebase initialization config
+└── main.dart                        # App entry point
 ```
 
 **Why feature-based?**
