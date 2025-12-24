@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:template/src/config/router/app_router.dart';
 import 'package:template/src/core/analytics_and_crashlytics/crashlytics/crashlytics_service.dart';
+import 'package:template/unorganized_files/graph_ql/graphql_service.dart';
 import 'src/core/di/dependency_injection.dart';
 import 'package:template/src/core/services/snackbar/snackbar_service.dart';
 import 'package:template/src/core/services/storage/local_storage_service.dart';
@@ -17,7 +19,11 @@ void main() async {
 
   LocalStorageService().init();
 
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    ProviderScope(
+      child: GraphQLProvider(client: MYGraphQLService.client, child: MyApp()),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {

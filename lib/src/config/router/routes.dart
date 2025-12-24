@@ -14,4 +14,6 @@ class AppRoutes {
   static const String wellcome = '/welcome-screen';
 
   static const String allpage = '/all-page';
+
+  static const String countryPage = '/country';
 }
