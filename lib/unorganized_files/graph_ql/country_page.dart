@@ -1,51 +1,66 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:template/src/core/utils/logger.dart';
+import 'package:template/unorganized_files/graph_ql/graphql_service.dart';
+
+class CountryRepository {
+  Future<Map<String, dynamic>> getCountry() async {
+    final GraphQLClient grapgQLService = GraphQLService.client(
+      GraphQLEndpoint.countries,
+    );
+    final QueryOptions options = QueryOptions(
+      document: gql(r'''
+        query {
+          country(code: "BR") {
+            name
+            native
+            capital
+            currency
+            languages {
+              name
+            }
+          }
+        }
+      '''),
+    );
+
+    final QueryResult result = await grapgQLService.query(options);
+
+    AppLogger.log(result.data.toString());
+    if (result.hasException) {
+      throw result.exception!;
+    }
+
+    return result.data!['country'];
+  }
+}
 
 class CountryPage extends StatelessWidget {
   const CountryPage({super.key});
-
-  final String getCountryQuery = r'''
-query {
-  country(code: "BR") {
-    name
-    native
-    capital
-    currency
-    languages {
-      name
-    }
-  }
-}
-''';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Country Details')),
-      body: Query(
-        options: QueryOptions(document: gql(getCountryQuery)),
-        builder: (QueryResult result, {fetchMore, refetch}) {
-          // 🔴 Error state
-          if (result.hasException) {
+      body: FutureBuilder<Map<String, dynamic>>(
+        future: CountryRepository().getCountry(),
+        builder: (context, snapshot) {
+          // ⏳ Loading
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          // ❌ Error
+          if (snapshot.hasError) {
             return Center(
               child: Text(
-                result.exception.toString(),
+                snapshot.error.toString(),
                 style: const TextStyle(color: Colors.red),
               ),
             );
           }
 
-          // ⏳ Loading state
-          if (result.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final country = result.data?['country'];
-
-          if (country == null) {
-            return const Center(child: Text('No data found'));
-          }
-
+          final country = snapshot.data!;
           final List languages = country['languages'];
 
           return SizedBox(

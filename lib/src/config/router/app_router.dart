@@ -9,6 +9,7 @@ import 'package:template/src/features/authentication/presentation/pages/signin_p
 import 'package:template/src/features/authentication/presentation/pages/signup_page.dart';
 import 'package:template/src/features/profile/presentation/page/profile_page.dart';
 import 'package:template/unorganized_files/graph_ql/country_page.dart';
+import 'package:template/unorganized_files/graph_ql/post_create.dart';
 import 'package:template/unorganized_files/protos/protobuf_service.dart';
 import 'package:template/unorganized_files/all_page.dart';
 
@@ -18,7 +19,7 @@ import 'routes.dart';
 final appRouterProvider = Provider<GoRouter>((ref) {
   final analytics = FirebaseAnalytics.instance;
   return GoRouter(
-    initialLocation: AppRoutes.countryPage,
+    initialLocation: AppRoutes.createPost,
     observers: [AppAnalyticsObserver(analytics)],
     routes: [
       GoRoute(path: AppRoutes.splash, builder: (context, state) => Allpage()),
@@ -63,6 +64,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.countryPage,
         builder: (context, state) => CountryPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.createPost,
+        builder: (context, state) => CreatePostPage(),
       ),
     ],
   );

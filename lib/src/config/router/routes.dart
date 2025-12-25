@@ -16,4 +16,5 @@ class AppRoutes {
   static const String allpage = '/all-page';
 
   static const String countryPage = '/country';
+  static const String createPost = '/create-post';
 }

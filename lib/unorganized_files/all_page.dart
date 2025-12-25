@@ -18,6 +18,8 @@ class Allpage extends ConsumerWidget {
       {'label': 'Analytics Test', 'route': AppRoutes.home},
       {'label': 'Profile', 'route': AppRoutes.profile},
       {'label': 'WelcomeScreen', 'route': AppRoutes.wellcome},
+      {'label': 'Get Country', 'route': AppRoutes.countryPage},
+      {'label': 'Create Post', 'route': AppRoutes.createPost},
     ];
 
     return Scaffold(
