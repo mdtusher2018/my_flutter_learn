@@ -1,4 +1,4 @@
-# 🚀 Flutter Template – Clean Architecture & Scalable App Boilerplate
+# 🚀 This Template – Clean Architecture & Scalable App Boilerplate
 
 A production-ready **Flutter project template** built with **Clean Architecture**, **SOLID Principles**, and **Feature-Driven Development**. This template is scalable, maintainable, and ideal for medium to large applications.
 
